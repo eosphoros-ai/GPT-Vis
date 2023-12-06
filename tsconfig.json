@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "GPT-Vis": ["src/components"],
+      "GPT-Vis/*": ["src/*", "*"]
+    }
+  },
+  "include": [".dumirc.ts", "./src/**/*"]
+}
