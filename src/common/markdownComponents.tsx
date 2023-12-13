@@ -6,9 +6,23 @@ import ReactMarkdown from 'react-markdown';
 import { format } from 'sql-formatter';
 import { AutoChart, BackEndChartType, getChartType } from './AutoChart';
 import { CodePreview } from './CodePreview';
-import CustomComponent from './CustomComponent';
 
 type MarkdownComponent = Parameters<typeof ReactMarkdown>['0']['components'];
+type Reference = {
+  name: string;
+  chunks: Array<number>;
+};
+type IChunk = {
+  content: string;
+  doc_name: string;
+  doc_type: string;
+  document_id: string | number;
+  gmt_created: string;
+  gmt_modified: string;
+  id: string | number;
+  meta_info: string;
+  recall_score?: string | number;
+};
 
 const basicComponents: MarkdownComponent = {
   code({ inline, className, children, style, ...props }) {
@@ -191,13 +205,6 @@ const extraComponents: MarkdownComponent = {
         {children}
       </div>
     );
-  },
-  'custom-view': ({ children, title }) => {
-    try {
-      return <CustomComponent title={title ?? ''}>{children}</CustomComponent>;
-    } catch (e) {
-      return children;
-    }
   },
 };
 

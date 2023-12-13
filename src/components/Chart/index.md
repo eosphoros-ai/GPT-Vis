@@ -32,7 +32,7 @@ const content = `
 为了分析缺陷类型与优先级的关系，并给出一份柱状图，我们可以使用以下SQL查询：
 
 \`\`\`sql
-sql SELECT "缺陷类型" AS "缺陷类型", "优先级" AS "缺陷优先级", COUNT(*) AS "缺陷数量" FROM excel_data GROUP BY "缺陷类型", "优先级";
+SELECT "缺陷类型" AS "缺陷类型", "优先级" AS "缺陷优先级", COUNT(*) AS "缺陷数量" FROM excel_data GROUP BY "缺陷类型", "优先级";
 \`\`\`
 
 这个查询将返回每个缺陷类型和优先级的组合以及对应的缺陷数量。 请执行以SQL查询以分析缺陷类型与优先级的关系：
@@ -144,6 +144,10 @@ const extraComponents: MarkdownComponent = {
 **最好是一个闭合标签**
 
 ```tsx | pure
+// BAD
+<chart-view />
+
+// GOOD
 <chart-view></chart-view>
 ```
 
