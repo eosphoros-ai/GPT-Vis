@@ -1,11 +1,12 @@
-import { LinkOutlined, SyncOutlined } from '@ant-design/icons';
+import { LinkOutlined, ReadOutlined, SyncOutlined } from '@ant-design/icons';
 import { Datum } from '@antv/ava';
-import { Image, Table, Tabs, TabsProps, Tag } from 'antd';
+import { Image, Popover, Table, Tabs, TabsProps, Tag } from 'antd';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { format } from 'sql-formatter';
 import { AutoChart, BackEndChartType, getChartType } from './AutoChart';
 import { CodePreview } from './CodePreview';
+import CustomComponent from './CustomComponent';
 
 type MarkdownComponent = Parameters<typeof ReactMarkdown>['0']['components'];
 type Reference = {
@@ -203,6 +204,108 @@ const extraComponents: MarkdownComponent = {
           size="small"
         />
         {children}
+      </div>
+    );
+  },
+  'custom-view': ({ children, title }) => {
+    try {
+      return <CustomComponent title={title}>{children}</CustomComponent>;
+    } catch (e) {
+      return <div>{children}</div>;
+    }
+  },
+  'references-view': ({ title, references, children }) => {
+    let referenceData;
+    // Low version compatibility, read data from children
+    if (children) {
+      try {
+        referenceData = JSON.parse(children as string);
+        title = referenceData.title;
+        references = referenceData.references;
+      } catch (error) {
+        console.log('parse references failed', error);
+        return <p className="text-sm text-red-500">Render Reference Error!</p>;
+      }
+    } else {
+      // new version, read from tag props.
+      try {
+        references = JSON.parse(references as string);
+      } catch (error) {
+        console.log('parse references failed', error);
+        return <p className="text-sm text-red-500">Render Reference Error!</p>;
+      }
+    }
+    if (!references || references?.length < 1) {
+      return null;
+    }
+    return (
+      <div className="border-t-[1px] border-gray-300 mt-3 py-2">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <LinkOutlined className="mr-2" />
+          <span className="font-semibold">{title}</span>
+        </p>
+        {references.map((reference: Reference, index: number) => (
+          <div
+            key={`file_${index}`}
+            className="text-sm font-normal block ml-2 h-6 leading-6 overflow-hidden"
+          >
+            <span className="inline-block w-6">[{index + 1}]</span>
+            <span className="mr-2 lg:mr-4 text-blue-400">{reference.name}</span>
+            {reference?.chunks?.map((chunk: IChunk | number, index) => (
+              <span key={`chunk_${index}`}>
+                {typeof chunk === 'object' ? (
+                  <Popover
+                    content={
+                      <div className="max-w-4xl">
+                        <p className="mt-2 font-bold mr-2 border-t border-gray-500 pt-2">
+                          Content:
+                        </p>
+                        <p>{chunk?.content || 'No Content'}</p>
+                        <p className="mt-2 font-bold mr-2 border-t border-gray-500 pt-2">
+                          MetaData:
+                        </p>
+                        <p>{chunk?.meta_info || 'No MetaData'}</p>
+                        <p className="mt-2 font-bold mr-2 border-t border-gray-500 pt-2">
+                          Score:
+                        </p>
+                        <p>{chunk?.recall_score || ''}</p>
+                      </div>
+                    }
+                    title="Chunk Information"
+                  >
+                    <span
+                      className="cursor-pointer text-blue-500 ml-2"
+                      key={`chunk_content_${chunk?.id}`}
+                    >
+                      {chunk?.id}
+                    </span>
+                  </Popover>
+                ) : (
+                  <span
+                    className="cursor-pointer text-blue-500 ml-2"
+                    key={`chunk_id_${chunk}`}
+                  >
+                    {chunk}
+                  </span>
+                )}
+                {index < reference?.chunks.length - 1 && (
+                  <span key={`chunk_comma_${index}`}>,</span>
+                )}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+  'summary-view': function ({ children }) {
+    return (
+      <div>
+        <p className="mb-2">
+          <ReadOutlined className="mr-2" />
+          <span className="font-semibold">Document Summary</span>
+        </p>
+        <div>{children}</div>
       </div>
     );
   },
