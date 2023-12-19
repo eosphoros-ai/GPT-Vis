@@ -1,15 +1,11 @@
 ---
 order: 0
-title: 基础Markdown展示
+title: Html elements
 ---
 
-# 基础Markdown展示
+# Markdown展示
 
-> 基础依赖: React-Markdown + Antd + TailWindCss
-
-## 基础标签类型
-
-### 示例
+> 依赖: React-Markdown + Antd + TailWindCss
 
 ```tsx
 /**
@@ -18,23 +14,22 @@ title: 基础Markdown展示
 import { Basic } from 'GPT-Vis';
 
 const content = `
-# H1 标签
 
-## H2 标签
+## \H2 标签
 
-### H3 标签
+## \H3 标签
 
-#### H4 标签
+### \H4 标签
 
-## 引用块
+## \引用块
 
 > 这里是引用块内容
 
-## 加粗
+## \加粗
 
 **这里是加粗内容**
 
-## 无序序列
+## \无序序列
 
 - student_id
 - student_name
@@ -42,7 +37,7 @@ const content = `
 - year_of_enrollment
 - student_age
 
-## 有序序列
+## \有序序列
 
 1. student_id
 2. student_name
@@ -50,7 +45,7 @@ const content = `
 4. year_of_enrollment
 5. student_age
 
-## 表格
+## \表格
 
 <table>
   <thead>
@@ -115,7 +110,7 @@ const content = `
 </table>
 
 
-## 代码块
+## \代码块
 
 \`\`\`
 import React from 'react';
@@ -127,14 +122,20 @@ function Component() {
 export default Component;
 \`\`\`
 
-## 行内代码块
+## \行内代码块
 \`inline block\`
 `;
 
 export default () => <Basic content={content} />;
 ```
 
-### h1
+## \<h1>
+
+```tsx
+import { Basic } from 'GPT-Vis';
+const content = `## \H1 标签`;
+export default () => <Basic content={content} />;
+```
 
 ```tsx | pure
 h1({ children }) {
@@ -146,7 +147,7 @@ h1({ children }) {
 }
 ```
 
-### h2
+## \<h2>
 
 ```tsx | pure
 h2({ children }) {
@@ -154,7 +155,7 @@ h2({ children }) {
 }
 ```
 
-### h3
+## \<h3>
 
 ```tsx | pure
 h3({ children }) {
@@ -162,7 +163,7 @@ h3({ children }) {
 }
 ```
 
-### h4
+## \<h4>
 
 ```tsx | pure
 h4({ children }) {
@@ -170,7 +171,7 @@ h4({ children }) {
 }
 ```
 
-### a
+## \<a>
 
 ```tsx | pure
 a({ children, href }) {
@@ -185,7 +186,7 @@ a({ children, href }) {
 }
 ```
 
-### ul
+## \<ul>
 
 ```tsx | pure
 ul({ children }) {
@@ -193,7 +194,7 @@ ul({ children }) {
 }
 ```
 
-### ol
+## \<ol>
 
 ```tsx | pure
 ol({ children }) {
@@ -201,7 +202,7 @@ ol({ children }) {
 }
 ```
 
-### li
+## \<li>
 
 ```tsx | pure
 li({ children, ordered }) {
@@ -217,7 +218,7 @@ li({ children, ordered }) {
 }
 ```
 
-### table
+## \<table>
 
 ```tsx | pure
 table({ children }) {
@@ -229,7 +230,7 @@ table({ children }) {
 }
 ```
 
-### thead
+## \<thead>
 
 ```tsx | pure
 thead({ children }) {
@@ -241,7 +242,7 @@ thead({ children }) {
 }
 ```
 
-### th
+## \<th>
 
 ```tsx | pure
 th({ children }) {
@@ -249,7 +250,7 @@ th({ children }) {
 }
 ```
 
-### td
+## \<td>
 
 ```tsx | pure
 td({ children }) {
@@ -261,7 +262,7 @@ td({ children }) {
 }
 ```
 
-### img
+## \<img>
 
 ```tsx | pure
 img({ src, alt }) {
@@ -283,7 +284,7 @@ img({ src, alt }) {
 }
 ```
 
-### blockquote
+## \<blockquote>
 
 ```tsx | pure
 blockquote({ children }) {
@@ -295,7 +296,7 @@ blockquote({ children }) {
 }
 ```
 
-### code
+## \<code>
 
 ```tsx | pure
 code({ inline, className, children, style, ...props }) {
