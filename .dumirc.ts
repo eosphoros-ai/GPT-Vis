@@ -4,14 +4,11 @@ export default defineConfig({
   outputPath: 'docs-dist',
   locales: [{ id: 'en-US', name: 'EN' }],
   resolve: {
-    atomDirs: [
-      { type: 'component', dir: 'src/components/' },
-      { type: 'tool', dir: '/src/tools' },
-    ],
+    atomDirs: [{ type: 'component', dir: 'src/components/' }],
   },
   themeConfig: {
     name: '',
-    logo: 'https://dbgpt.site/LOGO_1.png',
+    logo: '/logo.png',
     footer: false,
   },
   plugins: ['@umijs/plugins/dist/tailwindcss'],

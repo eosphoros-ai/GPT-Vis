@@ -488,8 +488,6 @@ const basicComponents: MarkdownComponent = {
   },
 };
 
-};
-
 const markdownComponents = {
   ...basicComponents,
 };

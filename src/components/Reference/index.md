@@ -1,6 +1,11 @@
 ---
+title: 知识库来源
 order: 3
 ---
+
+# 知识库来源表达
+
+## Example
 
 ```tsx
 /**
@@ -168,9 +173,9 @@ const extraComponents: MarkdownComponent = {
 
 ## 协议规范
 
-### ⚠️Tip
-
-**最好是一个闭合标签**
+:::warning{title=Tip}
+最好是一个闭合标签
+:::
 
 ```tsx | pure
 // BAD
@@ -180,20 +185,24 @@ const extraComponents: MarkdownComponent = {
 <references-view></references-view>
 ```
 
-**最好是通过标签属性传值**
+:::warning{title=Tip}
+最好是通过标签属性传值
+:::
 
 ```tsx | pure
 <references-view content="xxx"></references-view>
 ```
 
-**最好是JSON序列化内容**
+:::warning{title=Tip}
+最好是JSON序列化内容
+:::
 
 ```tsx | pure
 <references-view content="[{}]"></references-view>
 ```
 
-**字符转译**
-
-> 如果是序列化后的JSON需要将 `"` 转译为 `&quot;` 否则react-markdown无法正常识别完整的标签
+:::warning{title=Tip}
+如果是序列化后的JSON需要将 `"` 转译为 `&quot;` 否则react-markdown无法正常识别完整的标签
+:::
 
 `<references-view content="[{&quot;name&quot;: &quot;GPT-Vis&quot;}]"></references-view>`

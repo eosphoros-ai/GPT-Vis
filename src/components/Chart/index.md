@@ -1,8 +1,9 @@
 ---
+title: 智能图标推荐
 order: 5
 ---
 
-# Ava智能图标推荐
+# Antd/AVA智能图标推荐
 
 案例一
 
@@ -139,9 +140,9 @@ const extraComponents: MarkdownComponent = {
 
 ## 协议规范
 
-### ⚠️Tip
-
-**最好是一个闭合标签**
+:::warning{title=Tip}
+最好是一个闭合标签
+:::
 
 ```tsx | pure
 // BAD
@@ -151,20 +152,24 @@ const extraComponents: MarkdownComponent = {
 <chart-view></chart-view>
 ```
 
-**最好是通过标签属性传值**
+:::warning{title=Tip}
+最好是通过标签属性传值
+:::
 
 ```tsx | pure
 <chart-view content="xxx"></chart-view>
 ```
 
-**最好是JSON序列化内容**
+:::warning{title=Tip}
+最好是JSON序列化内容
+:::
 
 ```tsx | pure
 <chart-view content="[{}]"></chart-view>
 ```
 
-**字符转译**
-
-> 如果是序列化后的JSON需要将 `"` 转译为 `&quot;` 否则react-markdown无法正常识别完整的标签
+:::warning{title=Tip}
+如果是序列化后的JSON需要将 `"` 转译为 `&quot;` 否则react-markdown无法正常识别完整的标签
+:::
 
 `<chart-view content="[{&quot;name&quot;: &quot;GPT-Vis&quot;}]"></chart-view>`

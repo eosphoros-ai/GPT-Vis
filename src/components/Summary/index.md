@@ -1,6 +1,11 @@
 ---
+title: 知识库概括
 order: 4
 ---
+
+# 知识库概括
+
+## Example
 
 ```tsx
 /**
@@ -56,9 +61,9 @@ const extraComponents: MarkdownComponent = {
 
 ## 协议规范
 
-### ⚠️Tip
-
-**最好是一个闭合标签**
+:::warning{title=Tip}
+最好是个闭合标签
+:::
 
 ```tsx | pure
 // BAD

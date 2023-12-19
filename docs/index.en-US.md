@@ -4,17 +4,17 @@ hero:
   description: GPT-Vis Description
   actions:
     - text: Start
-      link: /components/foo
+      link: /components/basic
     - text: Github
       link: /
 features:
-  - title: Hello
+  - title: 基础Markdown
     emoji: 💎
     description: Put hello description here
-  - title: World
+  - title: GPT UI
     emoji: 🌈
     description: Put world description here
-  - title: '!'
+  - title: 智能图标推荐
     emoji: 🚀
     description: Put ! description here
 ---
