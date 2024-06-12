@@ -2,36 +2,33 @@
   "name": "GPT-Vis",
   "version": "0.0.1",
   "description": "GPT-Vis",
+  "repository": "git@github.com:eosphoros-ai/GPT-Vis.git",
   "license": "MIT",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
   "files": [
-    "dist"
+    "src",
+    "lib",
+    "es"
   ],
   "scripts": {
-    "build": "father build",
-    "build:watch": "father dev",
-    "dev": "dumi dev",
-    "docs:build": "dumi build",
-    "doctor": "father doctor",
-    "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepare": "husky install && dumi setup",
-    "prepublishOnly": "father doctor && npm run build",
-    "start": "npm run dev"
+    "build": "npm run build:lib && npm run build:es",
+    "build:es": "rm -rf es && tsc --module esnext --outDir es",
+    "build:lib": "rm -rf lib && tsc --module commonjs --outDir lib",
+    "dev": "vite dev",
+    "prepublishOnly": "npm run build"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{md,json}": [
       "prettier --write --no-error-on-unmatched-pattern"
     ],
     "*.{css,less}": [
-      "stylelint --fix",
       "prettier --write"
     ],
     "*.{js,jsx}": [
@@ -56,17 +53,13 @@
     "sql-formatter": "^14.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-conventional": "^18.4.3",
     "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@umijs/lint": "^4.0.89",
     "@umijs/plugins": "^4.0.89",
-    "dumi": "^2.2.16",
     "eslint": "^8.56.0",
-    "father": "^4.3.8",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
@@ -74,15 +67,13 @@
     "prettier-plugin-packagejson": "^2.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "stylelint": "^15.11.0",
-    "tailwindcss": "^3.3.6"
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "authors": []
 }
